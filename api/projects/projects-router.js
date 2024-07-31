@@ -71,4 +71,14 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
+router.get('/:id/actions', async (req, res) => {
+    try {
+        const projectId = req.params.id
+        const actions = await Projects.getProjectActions(projectId)
+        res.status(200).json(actions)
+    } catch (err) {
+        res.status(500).json({ message: "Internal server error" })
+    }
+})
+
 module.exports = router
